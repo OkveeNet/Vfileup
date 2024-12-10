@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Rundiz\Upload\Tests\PHP72;
+namespace Rundiz\Upload\Tests\PHP84;
 
 
 class UploadTest extends \PHPUnit\Framework\TestCase
@@ -298,9 +298,6 @@ class UploadTest extends \PHPUnit\Framework\TestCase
     }// testSecurityScan
 
 
-    /**
-     * @group upmultiple
-     */
     public function testUploadMultiple()
     {
         $_FILES = $this->files_multiple;

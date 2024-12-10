@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Rundiz\Upload\Tests\PHP72;
+namespace Rundiz\Upload\Tests\PHP84;
 
 
 class ThrowErrorTest extends \PHPUnit\Framework\TestCase
@@ -97,22 +97,17 @@ class ThrowErrorTest extends \PHPUnit\Framework\TestCase
 
     public function testMoveUploadedToError()
     {
-        if (
-            class_exists('\PHPUnit\Runner\Version') && 
-            method_exists('\PHPUnit\Runner\Version', 'id') &&
-            version_compare(\PHPUnit\Runner\Version::id(), '9.0', '>=')
-        ) {
-            $this->expectError(\PHPUnit\Framework\Error\Error::class);
-        } else {
-            $this->expectException(\PHPUnit\Framework\Error\Error::class);
+        try {
+            $_FILES = $this->file_text;
+
+            $Upload = new \Rundiz\Upload\Upload('filename');
+            $Upload->move_uploaded_to = null;
+            $Upload->upload();
+
+            unset($Upload);
+        } catch(\Exception $ex) {
+            $this->assertEquals('The move_uploaded_to property was not set', $ex->getMessage());
         }
-        $_FILES = $this->file_text;
-
-        $Upload = new \Rundiz\Upload\Upload('filename');
-        $Upload->move_uploaded_to = null;
-        $Upload->upload();
-
-        unset($Upload);
     }// testMoveUploadedToError
 
 

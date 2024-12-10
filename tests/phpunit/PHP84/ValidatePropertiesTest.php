@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Rundiz\Upload\Tests\PHP70;
+namespace Rundiz\Upload\Tests\PHP84;
 
 
 class ValidatePropertiesTest extends \PHPUnit\Framework\TestCase

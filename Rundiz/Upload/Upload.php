@@ -647,6 +647,7 @@ class Upload
      * Or you can call this method in case that you want to process the other uploaded file next to previous one.
      * 
      * @param string $input_file_name The name of input file.
+     * @throws \InvalidArgumentException Throw errors if invalid argument type.
      */
     public function setInputFileName($input_file_name)
     {
@@ -780,6 +781,7 @@ class Upload
      * @link http://php.net/manual/en/function.finfo-file.php More info about finfo_file() function.
      * @param string $input_file_name The input file name. This support only one file upload.
      * @return string Return file's mime type or error message.
+     * @throws \InvalidArgumentException Throw errors if invalid argument type.
      */
     public function testGetUploadedMimetype($input_file_name = null)
     {
@@ -1305,7 +1307,7 @@ class Upload
     /**
      * Validate that these options properties has properly set in the correct type.
      * 
-     * @throws Exception Throw errors on invalid property type.
+     * @throws \DomainException Throw errors when `move_uploaded_to` property was not set.
      */
     protected function validateOptionsProperties()
     {
@@ -1356,7 +1358,7 @@ class Upload
         }
 
         if (empty($this->move_uploaded_to)) {
-            trigger_error('The move_uploaded_to property was not set', E_USER_ERROR);
+            throw new \DomainException('The move_uploaded_to property was not set', 1);
         }
 
         if (!is_string($this->new_file_name) && $this->new_file_name != null) {
